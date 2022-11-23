@@ -30,7 +30,7 @@ class DiagnosticReport:
 
     def _get_oxygen_num(self, value_list, index):
         most_common = self._get_most_common_limit(value_list)
-        num_ones = self._get_count_of_ones(value_list)[index]
+        num_ones = self._get_count_of_ones(value_list, index)
         if int(num_ones) == int(most_common):
             return "1"
         return "1" if num_ones > most_common else "0"
@@ -38,13 +38,13 @@ class DiagnosticReport:
     def _get_most_common_limit(self, value_list):
         return ceil(len(value_list) / 2)
 
-    def _get_count_of_ones(self, value_list):
+    def _get_count_of_ones(self, value_list, index):
         val_len = len(value_list[0])
-        count = [0] * val_len
+        count = 0
         for line in value_list:
-           for i, digit in enumerate(line):
-               if  int(digit) == 1:
-                   count[i] = count[i] + 1
+            digit = line[index]
+            if int(digit) == 1:
+                count = count + 1
         return count
 
     def _get_co2_rating(self):
@@ -61,7 +61,7 @@ class DiagnosticReport:
 
     def _get_co2_num(self, value_list, index):
         most_common = self._get_most_common_limit(value_list)
-        num_ones = self._get_count_of_ones(value_list)[index]
+        num_ones = self._get_count_of_ones(value_list, index)
         if num_ones == most_common:
             return "0"
         return "1" if num_ones < most_common else "0"
@@ -70,8 +70,9 @@ def main():
     dr = DiagnosticReport("test_input.txt")
     # Test get ones 
     test_oxygen_list = ["11110", "10110", "10111", "10101", "11100", "10000", "11001"]
-    one_list = dr._get_count_of_ones(test_oxygen_list)
-    assert one_list == [7, 3, 5, 3, 3]
+    num_count = dr._get_count_of_ones(test_oxygen_list, 2)
+    num_count_list = [7, 3, 5, 3, 3]
+    assert num_count == num_count_list[2]
     # Test get_oxygen_num
     test_oxygen_list = ["11110", "10110", "10111", "10101", "11100", "10000", "11001"]
     oxy_num = dr._get_oxygen_num(test_oxygen_list,  1)
