@@ -23,8 +23,9 @@ class DiagnosticReport:
         if len(old_list) == 1:
             return old_list[0]
         new_list = []
+        oxygen_num = self._get_oxygen_num(old_list, index)
         for value in old_list:
-            if value[index] == self._get_oxygen_num(old_list, index):
+            if value[index] == oxygen_num:
                 new_list.append(value)
         return self._get_oxygen_list(index + 1, new_list)
 
@@ -54,8 +55,9 @@ class DiagnosticReport:
         if len(old_list) == 1:
             return old_list[0]
         new_list = []
+        co2_num = self._get_co2_num(old_list, index)
         for value in old_list:
-            if value[index] == self._get_co2_num(old_list, index):
+            if value[index] == co2_num:
                 new_list.append(value)
         return self._get_co2_list(index + 1, new_list)
 
