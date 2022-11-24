@@ -1,0 +1,10 @@
+#!/bin/bash
+if [[ $1 == "--help" ]]; then
+    echo "Usage: get_day_input year day"
+    exit 0
+fi
+YEAR=$1
+DAY=$2
+SESSION=$(cat cookie.txt)
+curl "https://adventofcode.com/$1/day/$2/input" -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate, br' -H 'Connection: keep-alive' -H "Referer: https://adventofcode.com/$1/day/$2" -H "Cookie: session=$SESSION" -H 'Upgrade-Insecure-Requests: 1' -H 'Sec-Fetch-Dest: document' -H 'Sec-Fetch-Mode: navigate' -H 'Sec-Fetch-Site: same-origin' -H 'Sec-Fetch-User: ?1' -H 'DNT: 1' -H 'Sec-GPC: 1' -H 'TE: trailers' > puzzle_input.txt.gz
+gzip -d puzzle_input.txt.gz
