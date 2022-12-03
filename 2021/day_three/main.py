@@ -40,7 +40,6 @@ class DiagnosticReport:
         return ceil(len(value_list) / 2)
 
     def _get_count_of_ones(self, value_list, index):
-        val_len = len(value_list[0])
         count = 0
         for line in value_list:
             digit = line[index]

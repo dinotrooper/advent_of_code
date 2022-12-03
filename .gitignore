@@ -1,1 +1,3 @@
 cookie.txt
+*.gz
+**/__pycache__/
